@@ -1,0 +1,17 @@
+{
+  "name": "task-tracker-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'task-tracker-cli'",
+    "app": "node ./bin/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bin": {
+    "task-tracker-cli": "./bin/index.js"
+  }
+}
