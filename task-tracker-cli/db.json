@@ -1,5 +1,5 @@
 {
-  "idCounter": 5,
+  "idCounter": 6,
   "tasks": [
     {
       "id": 1,
@@ -35,6 +35,13 @@
       "status": "done",
       "createdAt": "15.12.2025 15:24:10",
       "updatedAt": "15.12.2025 15:24:10"
+    },
+    {
+      "id": 6,
+      "description": "Taska huyaska",
+      "status": "todo",
+      "createdAt": "15.12.2025 15:59:16",
+      "updatedAt": "15.12.2025 15:59:16"
     }
   ]
 }

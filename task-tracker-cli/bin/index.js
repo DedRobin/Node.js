@@ -23,8 +23,7 @@ function main() {
 
   switch (action) {
     case ACTION_TYPES.ADD: {
-      const task = data.join(',');
-      add(task);
+      add(data);
       break;
     }
     case ACTION_TYPES.LIST: {

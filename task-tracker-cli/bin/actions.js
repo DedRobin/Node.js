@@ -33,8 +33,10 @@ const writeDb = async (db) => {
   await writeFile(DB_PATH, stringify(db));
 };
 
-const add = async (task) => {
-  if (!task) throw new Error("'task' variable has been missed");
+const add = async (data = []) => {
+  if (!data.length) throw new Error('Data is empty');
+
+  const task = data.join(' ');
   const datetime = getDatetime();
 
   try {
@@ -90,13 +92,6 @@ const add = async (task) => {
 const list = async (data) => {
   const taskStatusList = Object.values(TASK_STATUS);
   const taskStatus = data.at(0);
-
-  if (!taskStatusList.includes(taskStatus))
-    throw new Error(`
-The argument '${taskStatus}' is not the task status type
-Use the following options:
-${taskStatusList.join('\n')}
-    `);
 
   const db = await readOrCreateDb();
 
