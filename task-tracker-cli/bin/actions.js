@@ -87,12 +87,26 @@ const add = async (task) => {
   }
 };
 
-const list = async () => {
+const list = async (data) => {
+  const taskStatusList = Object.values(TASK_STATUS);
+  const taskStatus = data.at(0);
+
+  if (!taskStatusList.includes(taskStatus))
+    throw new Error(`
+The argument '${taskStatus}' is not the task status type
+Use the following options:
+${taskStatusList.join('\n')}
+    `);
+
   const db = await readOrCreateDb();
 
   const { tasks } = db;
 
-  tasks.forEach(({ id, description, status, createdAt, updatedAt }) => {
+  const filteredTasks = tasks.filter((task) =>
+    taskStatus ? task.status === taskStatus : true
+  );
+
+  filteredTasks.forEach(({ id, description, status, createdAt, updatedAt }) => {
     console.log(
       `${id}) ${[description, status, createdAt, updatedAt].join(' | ')}`
     );

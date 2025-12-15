@@ -4,14 +4,14 @@
     {
       "id": 1,
       "description": "Task some",
-      "status": "todo",
+      "status": "in-progress",
       "createdAt": "15.12.2025 15:13:9",
       "updatedAt": "15.12.2025 15:13:9"
     },
     {
       "id": 2,
       "description": "Task some 2",
-      "status": "todo",
+      "status": "done",
       "createdAt": "15.12.2025 15:13:13",
       "updatedAt": "15.12.2025 15:13:13"
     },
@@ -32,7 +32,7 @@
     {
       "id": 5,
       "description": "Task some 23123",
-      "status": "todo",
+      "status": "done",
       "createdAt": "15.12.2025 15:24:10",
       "updatedAt": "15.12.2025 15:24:10"
     }
