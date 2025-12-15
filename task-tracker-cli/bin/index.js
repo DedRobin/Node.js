@@ -2,10 +2,11 @@
 
 const { argv } = require('node:process');
 
-const { ACTION_TYPES, add } = require('./actions');
+const { ACTION_TYPES, add, list } = require('./actions');
 
 function main() {
   let action;
+  let data = [];
 
   const args = argv.slice(2);
 
@@ -14,23 +15,32 @@ function main() {
   }
 
   args.forEach((arg, index) => {
-    const isFirstArg = index === 0 && ACTION_TYPES.includes(arg);
+    const isFirstArg = index === 0;
+    const isActionType = Object.values(ACTION_TYPES).includes(arg);
 
-    if (isFirstArg) {
-      action = arg;
-      return;
-    }
+    if (isFirstArg && !isActionType)
+      throw new Error(`
+  The first argument is not action type. 
+Use the following options:
+-> add
+-> list`);
 
-    switch (action) {
-      case 'add': {
-        add(arg);
-        break;
-      }
-      default: {
-        break;
-      }
-    }
+    if (isFirstArg) action = arg;
+    else data.push(arg);
   });
+
+  switch (action) {
+    case ACTION_TYPES.ADD: {
+      add(data.join(','));
+      break;
+    }
+    case ACTION_TYPES.LIST: {
+      list();
+    }
+    default: {
+      break;
+    }
+  }
 }
 
 main();

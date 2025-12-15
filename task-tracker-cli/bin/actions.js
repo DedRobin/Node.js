@@ -1,35 +1,57 @@
 const { readFile, writeFile, access, constants } = require('node:fs/promises');
-const { stringify } = require('./services');
-const path = require('node:path');
 
-const ACTION_TYPES = [
-  'add',
-  'update',
-  'delete',
-  'list',
-  'mark-in-progress',
-  'mark-done',
-];
+const { stringify, getDatetime } = require('./services');
+const { DB_PATH } = require('./config');
+
+const ACTION_TYPES = {
+  ADD: 'add',
+  UPDATE: 'update',
+  DELETE: 'delete',
+  LIST: 'list',
+  MARK_IN_PROGRESS: 'mark-in-progress',
+  MARK_DONE: 'mark-done',
+};
+
+const TASK_STATUS = {
+  TODO: 'todo',
+  IN_PROGRESS: 'in-progress',
+  DONE: 'done',
+};
+
+const readOrCreateDb = async () => {
+  await access(DB_PATH, constants.F_OK);
+
+  const jsonFile = await readFile(DB_PATH);
+  const db = JSON.parse(jsonFile);
+
+  if (!db?.idCounter) throw new Error("No such property 'idCounter'");
+
+  return db;
+};
+
+const writeDb = async (db) => {
+  await writeFile(DB_PATH, stringify(db));
+};
 
 const add = async (task) => {
-  const fileName = 'db.json';
-  const filePath = path.resolve('./', fileName);
+  if (!task) throw new Error("'task' variable has been missed");
+  const datetime = getDatetime();
 
   try {
-    await access(filePath, constants.F_OK);
-
-    const jsonFile = await readFile(filePath);
-
-    const db = JSON.parse(jsonFile);
-
-    if (!db?.idCounter) throw new Error("No such property 'idCounter'");
+    const db = await readOrCreateDb();
 
     db.idCounter++;
     const taskId = db.idCounter;
 
-    db.tasks[taskId] = task;
+    db.tasks.push({
+      id: taskId,
+      description: task,
+      status: TASK_STATUS.TODO,
+      createdAt: datetime,
+      updatedAt: datetime,
+    });
 
-    await writeFile(filePath, stringify(db));
+    await writeDb(db);
 
     console.log(`Task "${task}" added successfully (ID: ${db.idCounter})`);
   } catch (err) {
@@ -39,23 +61,42 @@ const add = async (task) => {
     if (noSuchFileOrDir) {
       const initDb = {
         idCounter: 1,
-        tasks: {
-          1: task,
-        },
+        tasks: [
+          {
+            id: 1,
+            description: task,
+            status: TASK_STATUS.TODO,
+            createdAt: datetime,
+            updatedAt: datetime,
+          },
+        ],
       };
 
       await writeFile(filePath, stringify(initDb));
     } else if (failToParseJsonDb)
       console.error(`Fail to parse the "${fileName}":\n`, err);
-    else
+    else {
       console.error(
         `Something went wrong
-action=add
-value=${task}
-      `,
+    action=add
+    value=${task}
+          `,
         err
       );
+    }
   }
 };
 
-module.exports = { ACTION_TYPES, add };
+const list = async () => {
+  const db = await readOrCreateDb();
+
+  const { tasks } = db;
+
+  tasks.forEach(({ id, description, status, createdAt, updatedAt }) => {
+    console.log(
+      `${id}) ${[description, status, createdAt, updatedAt].join(' | ')}`
+    );
+  });
+};
+
+module.exports = { ACTION_TYPES, add, list };
