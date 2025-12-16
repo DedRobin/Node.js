@@ -1,7 +1,4 @@
-const { readFile, writeFile, access, constants } = require('node:fs/promises');
-
-const { stringify, getDatetime } = require('./services');
-const { DB_PATH } = require('./config');
+const { readOrCreateDb } = require('./db');
 
 const ACTION_TYPES = {
   ADD: 'add',
@@ -18,94 +15,19 @@ const TASK_STATUS = {
   DONE: 'done',
 };
 
-const readOrCreateDb = async () => {
-  await access(DB_PATH, constants.F_OK);
-
-  const jsonFile = await readFile(DB_PATH);
-  const db = JSON.parse(jsonFile);
-
-  if (!db?.idCounter) throw new Error("No such property 'idCounter'");
-
-  return db;
-};
-
-const writeDb = async (db) => {
-  await writeFile(DB_PATH, stringify(db));
-};
-
-const add = async (data = []) => {
-  if (!data.length) throw new Error('Data is empty');
-
-  const task = data.join(' ');
-  const datetime = getDatetime();
-
-  try {
-    const db = await readOrCreateDb();
-
-    db.idCounter++;
-    const taskId = db.idCounter;
-
-    db.tasks.push({
-      id: taskId,
-      description: task,
-      status: TASK_STATUS.TODO,
-      createdAt: datetime,
-      updatedAt: datetime,
-    });
-
-    await writeDb(db);
-
-    console.log(`Task "${task}" added successfully (ID: ${db.idCounter})`);
-  } catch (err) {
-    const noSuchFileOrDir = err.code === 'ENOENT';
-    const failToParseJsonDb = 'SyntaxError';
-
-    if (noSuchFileOrDir) {
-      const initDb = {
-        idCounter: 1,
-        tasks: [
-          {
-            id: 1,
-            description: task,
-            status: TASK_STATUS.TODO,
-            createdAt: datetime,
-            updatedAt: datetime,
-          },
-        ],
-      };
-
-      await writeFile(filePath, stringify(initDb));
-    } else if (failToParseJsonDb)
-      console.error(`Fail to parse the "${fileName}":\n`, err);
-    else {
-      console.error(
-        `Something went wrong
-    action=add
-    value=${task}
-          `,
-        err
-      );
-    }
-  }
-};
-
-const list = async (data) => {
-  const taskStatusList = Object.values(TASK_STATUS);
+const list = async data => {
+  // const taskStatusList = Object.values(TASK_STATUS);
   const taskStatus = data.at(0);
 
   const db = await readOrCreateDb();
 
   const { tasks } = db;
 
-  const filteredTasks = tasks.filter((task) =>
-    taskStatus ? task.status === taskStatus : true
-  );
+  const filteredTasks = tasks.filter(task => (taskStatus ? task.status === taskStatus : true));
 
   filteredTasks.forEach(({ id, description, status, createdAt, updatedAt }) => {
-    console.log(
-      `${id}) ${[description, status, createdAt, updatedAt].join(' | ')}`
-    );
+    console.log(`${id}) ${[description, status, createdAt, updatedAt].join(' | ')}`);
   });
 };
 
-module.exports = { ACTION_TYPES, add, list };
+module.exports = { ACTION_TYPES, TASK_STATUS, list };

@@ -2,7 +2,8 @@
 
 const { argv } = require('node:process');
 
-const { ACTION_TYPES, add, list } = require('./actions');
+const { ACTION_TYPES, list } = require('./actions');
+const add = require('./actions/add');
 
 function main() {
   let action;
@@ -28,6 +29,7 @@ function main() {
     }
     case ACTION_TYPES.LIST: {
       list(data);
+      break;
     }
     default: {
       const actionTypeList = Object.values(ACTION_TYPES);
@@ -38,7 +40,6 @@ The argument '${action}' is not action type.
 Use the following options:
 ${actionTypeList.join('\n')}`);
       }
-      break;
     }
   }
 }
