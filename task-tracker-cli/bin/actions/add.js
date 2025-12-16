@@ -1,6 +1,6 @@
 const { writeFile } = require('node:fs/promises');
 
-const { TASK_STATUS } = require('../actions');
+const { TASK_STATUS } = require('./constants');
 const { readOrCreateDb, writeDb } = require('../db');
 const { getDatetime, stringify } = require('../services');
 const { DB_PATH } = require('../config');

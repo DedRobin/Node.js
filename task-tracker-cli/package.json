@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo 'task-tracker-cli'",
     "app": "node ./bin/index.js",
-    "lint": "eslint ./bin --ext .js"
+    "lint": "eslint ./bin --ext .js",
+    "lint:fix": "eslint --fix ./bin --ext .js"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +17,11 @@
     "task-tracker-cli": "./bin/index.js"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
     "globals": "^16.5.0",
     "prettier": "^3.7.4"
   }

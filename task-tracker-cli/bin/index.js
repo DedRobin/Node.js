@@ -2,8 +2,9 @@
 
 const { argv } = require('node:process');
 
-const { ACTION_TYPES, list } = require('./actions');
+const { ACTION_TYPES } = require('./actions/constants');
 const add = require('./actions/add');
+const list = require('./actions/list');
 
 function main() {
   let action;

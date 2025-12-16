@@ -1,4 +1,4 @@
-const stringify = (data) => JSON.stringify(data, null, 2);
+const stringify = data => JSON.stringify(data, null, 2);
 
 const getDatetime = () => {
   const date = new Date();
