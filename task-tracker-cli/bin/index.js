@@ -7,6 +7,8 @@ const add = require('./actions/add');
 const list = require('./actions/list');
 const update = require('./actions/update');
 const deleteTask = require('./actions/delete');
+const markTaskInProgress = require('./actions/markInProgress');
+const markTaskIsDone = require('./actions/markIsDone');
 
 function main() {
   let action;
@@ -36,6 +38,14 @@ function main() {
     }
     case ACTION_TYPES.DELETE: {
       deleteTask(data);
+      break;
+    }
+    case ACTION_TYPES.MARK_IN_PROGRESS: {
+      markTaskInProgress(data);
+      break;
+    }
+    case ACTION_TYPES.MARK_DONE: {
+      markTaskIsDone(data);
       break;
     }
     default: {
