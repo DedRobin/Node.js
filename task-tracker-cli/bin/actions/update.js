@@ -1,4 +1,5 @@
 const { readOrCreateDb, writeDb } = require('../db');
+const { getDatetime } = require('../services');
 const { isValidTaskId, isValidTaskDescription } = require('./services');
 
 const update = async data => {
@@ -14,6 +15,7 @@ const update = async data => {
   db.tasks = db.tasks.map(task => {
     if (task.id === validTaskId) {
       task.description = validTaskDescription;
+      task.updatedAt = getDatetime();
       wasUpdated = true;
     }
     return task;

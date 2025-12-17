@@ -1,4 +1,5 @@
 const { readOrCreateDb, writeDb } = require('../db');
+const { getDatetime } = require('../services');
 const { isValidTaskId } = require('./services');
 
 const markTaskInProgress = async data => {
@@ -12,6 +13,7 @@ const markTaskInProgress = async data => {
   db.tasks = db.tasks.map(task => {
     if (task.id === validTaskId) {
       task.status = 'in-progress';
+      task.updatedAt = getDatetime();
       wasSetAsInProgress = true;
     }
     return task;

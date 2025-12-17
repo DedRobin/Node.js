@@ -7,9 +7,9 @@ const getDatetime = () => {
   const day = date.getDate().toString().padStart(2, '0');
   const year = date.getFullYear();
 
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const seconds = date.getSeconds().toString().padStart(2, '0');
 
   const datetime = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
 
