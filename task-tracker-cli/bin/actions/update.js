@@ -6,19 +6,21 @@ const update = async data => {
   const [taskIdAsString, updatedDescription] = data;
 
   if (!taskIdAsString) {
-    console.error('"Task ID is missed"');
+    console.error('"Task ID is required"');
     return;
   }
 
   if (!updatedDescription) {
-    console.error('"Task description is missed"');
+    console.error('Task description is required.');
     return;
   }
 
   const taskId = Number(taskIdAsString);
 
   if (Number.isNaN(taskId)) {
-    console.log(`Got not valid task ID (${taskIdAsString}), expected number`);
+    console.error(
+      `Got not valid task ID (${taskIdAsString}), expected number.`
+    );
     return;
   }
 
@@ -32,12 +34,12 @@ const update = async data => {
     return task;
   });
 
-  if (!wasUpdated) {
-    console.log(`There is no task with ID (${taskId})`);
-    return;
+  if (wasUpdated) {
+    await writeDb(db);
+    console.log(`Task has been updated successfully (ID: ${taskId}).`);
+  } else {
+    console.log(`The task (ID=${taskId}) is not found.`);
   }
-
-  await writeDb(db);
 };
 
 module.exports = update;

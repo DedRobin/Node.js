@@ -47,12 +47,16 @@ const add = async (data = []) => {
       };
 
       await writeFile(DB_PATH, stringify(initDb));
+      console.log('Database has been created.');
+      console.log(
+        `Task "${task}" added successfully (ID: ${initDb.idCounter})`
+      );
     } else if (failToParseJsonDb)
       console.error(`Fail to parse the "${DB_PATH}":\n`, err);
     else {
       console.error(
         `Something went wrong
-      action=add
+          action=add
       value=${task}
             `,
         err

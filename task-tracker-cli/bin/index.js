@@ -6,6 +6,7 @@ const { ACTION_TYPES } = require('./actions/constants');
 const add = require('./actions/add');
 const list = require('./actions/list');
 const update = require('./actions/update');
+const deleteTask = require('./actions/delete');
 
 function main() {
   let action;
@@ -31,6 +32,10 @@ function main() {
     }
     case ACTION_TYPES.UPDATE: {
       update(data);
+      break;
+    }
+    case ACTION_TYPES.DELETE: {
+      deleteTask(data);
       break;
     }
     default: {
