@@ -1,28 +1,17 @@
 const { readOrCreateDb, writeDb } = require('../db');
+const { isValidTaskId } = require('./services');
 
 const deleteTask = async data => {
   let wasDeleted = false;
 
   const db = await readOrCreateDb();
 
-  const [taskIdAsString] = data;
+  const [taskId] = data;
 
-  if (!taskIdAsString) {
-    console.error('Task ID is required.');
-    return;
-  }
-
-  const taskId = Number(taskIdAsString);
-
-  if (Number.isNaN(taskId)) {
-    console.error(
-      `Got not valid task ID (${taskIdAsString}), expected number.`
-    );
-    return;
-  }
+  const validTaskId = isValidTaskId(taskId);
 
   db.tasks = db.tasks.filter(task => {
-    if (task.id === taskId) {
+    if (task.id === validTaskId) {
       wasDeleted = true;
       return false;
     }
@@ -32,9 +21,9 @@ const deleteTask = async data => {
 
   if (wasDeleted) {
     await writeDb(db);
-    console.log(`Task has been deleted successfully (ID: ${taskId}).`);
+    console.log(`Task has been deleted successfully (ID: ${validTaskId}).`);
   } else {
-    console.log(`The task (ID=${taskId}) is not found.`);
+    console.log(`The task (ID=${validTaskId}) is not found.`);
   }
 };
 

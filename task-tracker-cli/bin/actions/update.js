@@ -1,34 +1,19 @@
 const { readOrCreateDb, writeDb } = require('../db');
+const { isValidTaskId, isValidTaskDescription } = require('./services');
 
 const update = async data => {
   let wasUpdated = false;
 
-  const [taskIdAsString, updatedDescription] = data;
+  const [taskId, description] = data;
 
-  if (!taskIdAsString) {
-    console.error('"Task ID is required"');
-    return;
-  }
-
-  if (!updatedDescription) {
-    console.error('Task description is required.');
-    return;
-  }
-
-  const taskId = Number(taskIdAsString);
-
-  if (Number.isNaN(taskId)) {
-    console.error(
-      `Got not valid task ID (${taskIdAsString}), expected number.`
-    );
-    return;
-  }
+  const validTaskDescription = isValidTaskDescription(description);
+  const validTaskId = isValidTaskId(taskId);
 
   const db = await readOrCreateDb();
 
   db.tasks = db.tasks.map(task => {
-    if (task.id === taskId) {
-      task.description = updatedDescription;
+    if (task.id === validTaskId) {
+      task.description = validTaskDescription;
       wasUpdated = true;
     }
     return task;
@@ -36,9 +21,9 @@ const update = async data => {
 
   if (wasUpdated) {
     await writeDb(db);
-    console.log(`Task has been updated successfully (ID: ${taskId}).`);
+    console.log(`Task has been updated successfully (ID: ${validTaskId}).`);
   } else {
-    console.log(`The task (ID=${taskId}) is not found.`);
+    console.log(`The task (ID=${validTaskId}) is not found.`);
   }
 };
 
