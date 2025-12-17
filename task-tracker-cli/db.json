@@ -3,7 +3,7 @@
   "tasks": [
     {
       "id": 1,
-      "description": "Task some",
+      "description": "2",
       "status": "in-progress",
       "createdAt": "15.12.2025 15:13:9",
       "updatedAt": "15.12.2025 15:13:9"
@@ -17,7 +17,7 @@
     },
     {
       "id": 3,
-      "description": "Task some 3",
+      "description": "New description 3",
       "status": "todo",
       "createdAt": "15.12.2025 15:13:17",
       "updatedAt": "15.12.2025 15:13:17"

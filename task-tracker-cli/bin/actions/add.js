@@ -47,7 +47,8 @@ const add = async (data = []) => {
       };
 
       await writeFile(DB_PATH, stringify(initDb));
-    } else if (failToParseJsonDb) console.error(`Fail to parse the "${DB_PATH}":\n`, err);
+    } else if (failToParseJsonDb)
+      console.error(`Fail to parse the "${DB_PATH}":\n`, err);
     else {
       console.error(
         `Something went wrong

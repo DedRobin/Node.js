@@ -8,10 +8,14 @@ const list = async data => {
 
   const { tasks } = db;
 
-  const filteredTasks = tasks.filter(task => (taskStatus ? task.status === taskStatus : true));
+  const filteredTasks = tasks.filter(task =>
+    taskStatus ? task.status === taskStatus : true
+  );
 
   filteredTasks.forEach(({ id, description, status, createdAt, updatedAt }) => {
-    console.log(`${id}) ${[description, status, createdAt, updatedAt].join(' | ')}`);
+    console.log(
+      `${id}) ${[description, status, createdAt, updatedAt].join(' | ')}`
+    );
   });
 };
 

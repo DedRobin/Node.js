@@ -5,16 +5,13 @@ const { argv } = require('node:process');
 const { ACTION_TYPES } = require('./actions/constants');
 const add = require('./actions/add');
 const list = require('./actions/list');
+const update = require('./actions/update');
 
 function main() {
   let action;
   let data = [];
 
   const args = argv.slice(2);
-
-  // if (args.length >= 3) {
-  //   console.error(`Extra erguments, 2 expected, got ${args.length}`);
-  // }
 
   args.forEach((arg, index) => {
     const isFirstArg = index === 0;
@@ -32,14 +29,23 @@ function main() {
       list(data);
       break;
     }
+    case ACTION_TYPES.UPDATE: {
+      update(data);
+      break;
+    }
     default: {
       const actionTypeList = Object.values(ACTION_TYPES);
       const isActionType = actionTypeList.includes(action);
+
       if (!isActionType) {
-        throw new Error(`
+        const formattedActionTypeList = actionTypeList
+          .map(actionType => '- ' + actionType)
+          .join('\n');
+
+        console.error(`
 The argument '${action}' is not action type. 
 Use the following options:
-${actionTypeList.join('\n')}`);
+${formattedActionTypeList}`);
       }
     }
   }
