@@ -1,0 +1,16 @@
+{
+  "name": "github-activity",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'github-activity'",
+    "app": "node ./bin/index.js",
+    "lint": "eslint ./bin --ext .js",
+    "lint:fix": "eslint --fix ./bin --ext .js"
+  },
+  "devDependencies": {}
+}
