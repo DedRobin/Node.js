@@ -1,0 +1,33 @@
+{
+  "name": "Node.js",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Test\"",
+    "task-tracker-cli": "npm run app -w task-tracker-cli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DedRobin/test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.5.0",
+    "prettier": "^3.7.4"
+  },
+  "bugs": {
+    "url": "https://github.com/DedRobin/test/issues"
+  },
+  "homepage": "https://github.com/DedRobin/test#readme",
+  "workspaces": [
+    "task-tracker-cli"
+  ]
+}
