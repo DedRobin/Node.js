@@ -1,8 +1,14 @@
 # Backend Projects
 
+The following projects were developed to enhance my skills as a developer using platform
+
+## Project list:
+
 1. [Task Tracker CLI](#1-task-tracker-cli)
 
 ## 1. Task Tracker CLI
+
+***Created by project https://roadmap.sh/projects/task-tracker***
 
 Task tracker is a project used to track and manage your tasks. In this task, you will build a simple command line interface (CLI) to track what you need to do, what you have done, and what you are currently working on.
 
