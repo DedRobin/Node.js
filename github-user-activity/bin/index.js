@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { argv } = require('node:process');
+const { handleEventType } = require('./services');
 
 async function main() {
   let username;
@@ -18,11 +19,13 @@ async function main() {
       `https://api.github.com/users/${username}/events`,
       { headers: { accept: 'application/vnd.github+json' } }
     );
-    const data = await response.json();
+    const events = await response.json();
     // console.log(
     //   data.map(event => `${event.type} (${event['created_at']})`).join('\n')
     // );
-    console.log(data[0]);
+    const firstTenEvents = events.slice(0, 10);
+
+    firstTenEvents.forEach(event => handleEventType(event));
   } catch (error) {
     console.error('Fetch error:', error);
   }
