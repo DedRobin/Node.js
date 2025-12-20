@@ -16,8 +16,9 @@ const handleCreate = async event => {
   const branchUrl = new URL(`${repoURL}/tree/${branch}`);
 
   console.log(`
-Date: ${createdAt} - Created a new ${refType}
-URL: ${branchUrl.href}`);
+Created a new ${refType}
+Branch URL: ${branchUrl.href}
+Date: ${createdAt}`);
 };
 
 module.exports = handleCreate;
