@@ -1,11 +1,9 @@
 const { getRepositoryUrl } = require('../api/github');
+const { print } = require('./services');
 
 const handleCreate = async event => {
   const repoURL = await getRepositoryUrl(event);
   if (!repoURL) throw new getRepositoryUrl('No repository URL');
-
-  const createdAt = event?.['created_at'];
-  if (!createdAt) throw new Error('No date');
 
   const refType = event?.payload?.['ref_type'];
   if (!refType) throw new Error('No reference type');
@@ -15,10 +13,10 @@ const handleCreate = async event => {
 
   const branchUrl = new URL(`${repoURL}/tree/${branch}`);
 
-  console.log(`
-Created a new ${refType}
-Branch URL: ${branchUrl.href}
-Date: ${createdAt}`);
+  const message = `Created a new ${refType}
+Branch URL: ${branchUrl.href}`;
+
+  print(message, event);
 };
 
 module.exports = handleCreate;

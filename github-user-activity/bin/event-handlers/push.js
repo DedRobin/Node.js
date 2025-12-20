@@ -1,4 +1,5 @@
 const { getRepositoryUrl } = require('../api/github');
+const { print } = require('./services');
 
 const handlePush = async event => {
   const repoURL = await getRepositoryUrl(event);
@@ -12,10 +13,10 @@ const handlePush = async event => {
 
   const commitUrl = new URL(`${repoURL}/commit/${commitHash}`);
 
-  console.log(`
-Pushed new commit to a branch:
-Commit URL: ${commitUrl.href}
-Date: ${createdAt}`);
+  const message = `Pushed new commit to a branch:
+Commit URL: ${commitUrl.href}`;
+
+  print(message, event);
 };
 
 module.exports = handlePush;
