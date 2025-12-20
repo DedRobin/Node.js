@@ -1,11 +1,23 @@
 const { EVENT_TYPE } = require('./constants');
+const handleCommitComment = require('./event-handlers/commitComment');
 const handleCreate = require('./event-handlers/create');
+const handleDelete = require('./event-handlers/delete');
+const handleFork = require('./event-handlers/fork');
+const handleGollum = require('./event-handlers/gollum');
+const handleIssue = require('./event-handlers/issue');
+const handleIssueComment = require('./event-handlers/issueComment');
+const handleMember = require('./event-handlers/member');
+const handlePublish = require('./event-handlers/publish');
+const handlePull = require('./event-handlers/pull');
+const handlePullRequestView = require('./event-handlers/pullRequestView');
+const handlePullRequestViewComment = require('./event-handlers/pullRequestViewComment');
+const handlePullRequestViewThread = require('./event-handlers/pullRequestViewThread');
 const handlePush = require('./event-handlers/push');
 
 const handleEventType = event => {
   switch (event.type) {
     case EVENT_TYPE.COMMITCOMMENT: {
-      console.log('Commented on a commit');
+      handleCommitComment(event);
       break;
     }
     case EVENT_TYPE.CREATE: {
@@ -13,47 +25,47 @@ const handleEventType = event => {
       break;
     }
     case EVENT_TYPE.DELETE: {
-      console.log('Deleted a branch or tag');
+      handleDelete(event);
       break;
     }
     case EVENT_TYPE.FORK: {
-      console.log('Forked a repository');
+      handleFork(event);
       break;
     }
     case EVENT_TYPE.GOLLUM: {
-      console.log('Updated a wiki page');
+      handleGollum;
       break;
     }
     case EVENT_TYPE.ISSUECOMMENT: {
-      console.log('Posted a comment on an issue');
+      handleIssueComment(event);
       break;
     }
     case EVENT_TYPE.ISSUES: {
-      console.log('Opened, closed, or managed an issue');
+      handleIssue(event);
       break;
     }
     case EVENT_TYPE.MEMBER: {
-      console.log('Updated collaborator access for a repository');
+      handleMember(event);
       break;
     }
     case EVENT_TYPE.PUBLISH: {
-      console.log('Made a private repository public');
+      handlePublish(event);
       break;
     }
     case EVENT_TYPE.PULL: {
-      console.log('Opened or updated a pull request');
+      handlePull(event);
       break;
     }
     case EVENT_TYPE.PULLREQUESTREVIEW: {
-      console.log('Submitted a review for a pull request');
+      handlePullRequestView(event);
       break;
     }
     case EVENT_TYPE.PULLREQUESTREVIEWCOMMENT: {
-      console.log("Commented on a pull request's diff");
+      handlePullRequestViewComment(event);
       break;
     }
     case EVENT_TYPE.PULLREQUESTREVIEWTHREAD: {
-      console.log('Resolved or reopened a review thread');
+      handlePullRequestViewThread(event);
       break;
     }
     case EVENT_TYPE.PUSH: {
