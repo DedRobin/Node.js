@@ -1,4 +1,5 @@
 const { EVENT_TYPE } = require('./constants');
+const handleCreate = require('./event-handlers/create');
 const handlePush = require('./event-handlers/push');
 
 const handleEventType = event => {
@@ -8,7 +9,7 @@ const handleEventType = event => {
       break;
     }
     case EVENT_TYPE.CREATE: {
-      console.log('Created a new repository, branch, or tag');
+      handleCreate(event);
       break;
     }
     case EVENT_TYPE.DELETE: {

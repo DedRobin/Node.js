@@ -13,9 +13,9 @@ const handlePush = event => {
   const commitUrl = new URL(`${repositoryName}/commit/${commitHash}`, origin);
 
   console.log(`
-Date: ${createdAt} - Pushed new commits to a branch:
+Date: ${createdAt} - Pushed new commit to a branch:
 Commit URL: ${commitUrl.href}
-        `);
+`);
 };
 
 module.exports = handlePush;
