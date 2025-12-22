@@ -2,6 +2,7 @@ const { EVENT_TYPE } = require('./constants');
 const handleCommitComment = require('./event-handlers/commitComment');
 const handleCreate = require('./event-handlers/create');
 const handleDelete = require('./event-handlers/delete');
+const handleDiscussion = require('./event-handlers/discussion');
 const handleFork = require('./event-handlers/fork');
 const handleGollum = require('./event-handlers/gollum');
 const handleIssue = require('./event-handlers/issue');
@@ -26,6 +27,10 @@ const handleEventType = event => {
     }
     case EVENT_TYPE.DELETE: {
       handleDelete(event);
+      break;
+    }
+    case EVENT_TYPE.DISCUSSION: {
+      handleDiscussion(event);
       break;
     }
     case EVENT_TYPE.FORK: {

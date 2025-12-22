@@ -2,6 +2,7 @@ const EVENT_TYPE = {
   COMMITCOMMENT: 'CommitCommentEvent',
   CREATE: 'CreateEvent',
   DELETE: 'DeleteEvent',
+  DISCUSSION: 'DiscussionEvent',
   FORK: 'ForkEvent',
   GOLLUM: 'GollumEvent',
   ISSUECOMMENT: 'IssueCommentEvent',
