@@ -13,8 +13,11 @@ const handleCreate = async event => {
 
   const branchUrl = new URL(`${repoURL}/tree/${branch}`);
 
-  const message = `Created a new ${refType}
-Branch URL: ${branchUrl.href}`;
+  const repoName = event?.repo?.name;
+  if (!repoName) throw new Error('No repository name');
+
+  const message = `Created a new ${refType} in repository '${repoName}'
+URL: ${branchUrl.href}`;
 
   print(message, event);
 };

@@ -13,8 +13,11 @@ const handlePush = async event => {
 
   const commitUrl = new URL(`${repoURL}/commit/${commitHash}`);
 
-  const message = `Pushed new commit to a branch:
-Commit URL: ${commitUrl.href}`;
+  const repoName = event?.repo?.name;
+  if (!repoName) throw new Error('No repository name');
+
+  const message = `Pushed new commit to the branch in repository '${repoName}'
+URL: ${commitUrl.href}`;
 
   print(message, event);
 };

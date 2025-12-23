@@ -7,8 +7,10 @@ const handleDelete = event => {
   const deletedBranch = event?.payload?.ref;
   if (!deletedBranch) throw new Error('No deleted branch');
 
-  const message = `Deleted the ${refType}
-Removed branch: ${deletedBranch}`;
+  const repoName = event?.repo?.name;
+  if (!repoName) throw new Error('No repository name');
+
+  const message = `Deleted the ${refType} '${deletedBranch}' from the repository '${repoName}'`;
 
   print(message, event);
 };

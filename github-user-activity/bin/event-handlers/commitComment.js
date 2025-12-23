@@ -7,12 +7,13 @@ const handleCommitComment = event => {
   const url = event?.payload?.comment?.['html_url'];
   if (!url) throw new Error('No comment URL');
 
-  const action = event?.payload?.['action'];
-  if (!url) throw new Error('No comment action');
+  const commentOwner = event?.payload?.comment?.user?.login;
+  if (!commentOwner) throw new Error('No user who leave comment');
 
-  const message = `Commented on a commit
-Action=${action}
-Comment: ${comment}
+  const repoName = event?.repo?.name;
+  if (!repoName) throw new Error('No repository name');
+
+  const message = `Commented on a commit by user '${commentOwner}' in repository '${repoName}'
 URL: ${url}`;
 
   print(message, event);
