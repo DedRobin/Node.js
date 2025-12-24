@@ -3,6 +3,8 @@
 const { argv } = require('node:process');
 const { handleEventType } = require('./services');
 
+process.loadEnvFile();
+
 async function main() {
   let username;
 
@@ -14,10 +16,18 @@ async function main() {
   }
 
   username = args[0];
+
+  const token = process.env.PERSONAL_ACCESS_TOKEN;
+
   try {
     const response = await fetch(
       `https://api.github.com/users/${username}/events`,
-      { headers: { accept: 'application/vnd.github+json' } }
+      {
+        headers: {
+          accept: 'application/vnd.github+json',
+          Authorization: token ? `Bearer ${token}` : undefined,
+        },
+      }
     );
     const events = await response.json();
     // console.log(

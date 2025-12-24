@@ -38,7 +38,7 @@ const handleEventType = event => {
       break;
     }
     case EVENT_TYPE.GOLLUM: {
-      handleGollum;
+      handleGollum(event);
       break;
     }
     case EVENT_TYPE.ISSUECOMMENT: {
