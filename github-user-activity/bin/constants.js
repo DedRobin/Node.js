@@ -8,7 +8,7 @@ const EVENT_TYPE = {
   ISSUECOMMENT: 'IssueCommentEvent',
   ISSUES: 'IssuesEvent',
   MEMBER: 'MemberEvent',
-  PUBLISH: 'PublishEvent',
+  PUBLIC: 'PublicEvent',
   PULL: 'PullRequestEvent',
   PULLREQUESTREVIEW: 'PullRequestReviewEvent',
   PULLREQUESTREVIEWCOMMENT: 'PullRequestReviewCommentEvent',

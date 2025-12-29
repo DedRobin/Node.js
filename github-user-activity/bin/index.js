@@ -33,9 +33,9 @@ async function main() {
     // console.log(
     //   data.map(event => `${event.type} (${event['created_at']})`).join('\n')
     // );
-    const firstTenEvents = events.slice(0, 10);
+    const firstFiveEvents = events.slice(0, 5);
 
-    firstTenEvents.forEach(event => handleEventType(event));
+    firstFiveEvents.forEach(event => handleEventType(event));
   } catch (error) {
     console.error('Fetch error:', error);
   }

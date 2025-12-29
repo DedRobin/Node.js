@@ -8,7 +8,7 @@ const handleGollum = require('./event-handlers/gollum');
 const handleIssue = require('./event-handlers/issue');
 const handleIssueComment = require('./event-handlers/issueComment');
 const handleMember = require('./event-handlers/member');
-const handlePublish = require('./event-handlers/publish');
+const handlePublic = require('./event-handlers/public');
 const handlePull = require('./event-handlers/pull');
 const handlePullRequestView = require('./event-handlers/pullRequestView');
 const handlePullRequestViewComment = require('./event-handlers/pullRequestViewComment');
@@ -53,8 +53,8 @@ const handleEventType = event => {
       handleMember(event);
       break;
     }
-    case EVENT_TYPE.PUBLISH: {
-      handlePublish(event);
+    case EVENT_TYPE.PUBLIC: {
+      handlePublic(event);
       break;
     }
     case EVENT_TYPE.PULL: {
