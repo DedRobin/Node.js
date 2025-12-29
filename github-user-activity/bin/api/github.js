@@ -18,6 +18,10 @@ const cachedGetRepositoryUrl = () => {
     };
     try {
       const response = await fetch(apiUrl, { headers });
+      const statusCode = response.status;
+
+      if (statusCode !== 200) throw new Error(`Status code ${statusCode}`);
+
       const data = await response.json();
 
       const repoUrl = data?.['html_url'];
@@ -28,7 +32,7 @@ const cachedGetRepositoryUrl = () => {
 
       return repoUrl;
     } catch (err) {
-      console.error(`Fetch error`, err?.message || 'No error message');
+      console.error(`Fetch error:`, err?.message || 'No error message');
     }
   };
 };
