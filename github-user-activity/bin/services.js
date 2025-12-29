@@ -10,7 +10,7 @@ const handleIssueComment = require('./event-handlers/issueComment');
 const handleMember = require('./event-handlers/member');
 const handlePublic = require('./event-handlers/public');
 const handlePull = require('./event-handlers/pull');
-const handlePullRequestView = require('./event-handlers/pullRequestView');
+const handlePullRequestReview = require('./event-handlers/pullRequestReview');
 const handlePullRequestViewComment = require('./event-handlers/pullRequestViewComment');
 const handlePullRequestViewThread = require('./event-handlers/pullRequestViewThread');
 const handlePush = require('./event-handlers/push');
@@ -62,7 +62,7 @@ const handleEventType = event => {
       break;
     }
     case EVENT_TYPE.PULLREQUESTREVIEW: {
-      handlePullRequestView(event);
+      handlePullRequestReview(event);
       break;
     }
     case EVENT_TYPE.PULLREQUESTREVIEWCOMMENT: {

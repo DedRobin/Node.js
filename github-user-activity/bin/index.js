@@ -30,10 +30,8 @@ async function main() {
       }
     );
     const events = await response.json();
-    // console.log(
-    //   data.map(event => `${event.type} (${event['created_at']})`).join('\n')
-    // );
-    const firstFiveEvents = events.slice(0, 5);
+
+    const firstFiveEvents = events.slice(0, 10);
 
     firstFiveEvents.forEach(event => handleEventType(event));
   } catch (error) {
