@@ -1,5 +1,5 @@
 const { getRepositoryUrl } = require('../api/github');
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const handlePublic = async event => {
   const repoUrl = await getRepositoryUrl(event);
@@ -11,7 +11,7 @@ const handlePublic = async event => {
   const message = `Made the private repository '${repoName}' public
 URL: ${repoUrl}`;
 
-  print(message, event);
+  return appendDateTime(message, event);
 };
 
 module.exports = handlePublic;

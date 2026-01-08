@@ -1,4 +1,4 @@
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const WIKI_ACTION_TYPE = {
   created: 'Creates',
@@ -29,7 +29,8 @@ URL: ${url}`;
     messages.push(message);
   });
   const fullMessage = 'Wiki pages:\n' + messages.join('\n');
-  print(fullMessage, event);
+
+  return appendDateTime(fullMessage, event);
 };
 
 module.exports = handleGollum;

@@ -1,5 +1,5 @@
 const { getRepositoryUrl } = require('../api/github');
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const handleCreate = async event => {
   const repoURL = await getRepositoryUrl(event);
@@ -19,7 +19,7 @@ const handleCreate = async event => {
   const message = `Created a new ${refType} in repository '${repoName}'
 URL: ${branchUrl.href}`;
 
-  print(message, event);
+  return appendDateTime(message, event);
 };
 
 module.exports = handleCreate;

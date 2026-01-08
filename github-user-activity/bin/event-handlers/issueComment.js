@@ -1,4 +1,4 @@
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const handleIssueComment = event => {
   const whoseComment = event?.payload?.issue?.user?.login;
@@ -12,7 +12,8 @@ const handleIssueComment = event => {
 
   const message = `Posted a comment on an issue by '${whoseComment}' in repository '${repoName}'
 URL: ${url}`;
-  print(message, event);
+
+  return appendDateTime(message, event);
 };
 
 module.exports = handleIssueComment;

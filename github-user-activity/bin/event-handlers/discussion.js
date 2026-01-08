@@ -1,4 +1,4 @@
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const handleDiscussion = async event => {
   const url = event?.payload?.discussion?.['html_url'];
@@ -13,7 +13,7 @@ const handleDiscussion = async event => {
   const message = `Creates the discussion in the repository '${repoName}'
 URL: ${url}`;
 
-  print(message, event);
+  return appendDateTime(message, event);
 };
 
 module.exports = handleDiscussion;

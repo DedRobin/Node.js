@@ -1,4 +1,4 @@
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const ISSUE_ACTION_TYPE = {
   opened: 'Opened',
@@ -23,7 +23,7 @@ const handleIssue = event => {
   const message = `${action} the issue by user '${issueOwner}' in repository '${repoName}'
 URL: ${url}`;
 
-  print(message, event);
+  return appendDateTime(message, event);
 };
 
 module.exports = handleIssue;

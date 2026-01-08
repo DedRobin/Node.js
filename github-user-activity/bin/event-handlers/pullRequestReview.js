@@ -1,4 +1,4 @@
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const handlePullRequestReview = event => {
   const reviewer = event?.payload?.review?.user?.login;
@@ -10,7 +10,7 @@ const handlePullRequestReview = event => {
   const message = `Submitted a review for a pull request by ${reviewer}
 URL: ${url}`;
 
-  print(message, event);
+  return appendDateTime(message, event);
 };
 
 module.exports = handlePullRequestReview;

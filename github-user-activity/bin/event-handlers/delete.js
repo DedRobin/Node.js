@@ -1,4 +1,4 @@
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const handleDelete = event => {
   const refType = event?.payload?.['ref_type'];
@@ -12,7 +12,7 @@ const handleDelete = event => {
 
   const message = `Deleted the ${refType} '${deletedBranch}' from the repository '${repoName}'`;
 
-  print(message, event);
+  return appendDateTime(message, event);
 };
 
 module.exports = handleDelete;

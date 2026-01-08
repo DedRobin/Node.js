@@ -15,83 +15,61 @@ const handlePullRequestViewComment = require('./event-handlers/pullRequestViewCo
 const handlePullRequestViewThread = require('./event-handlers/pullRequestViewThread');
 const handlePush = require('./event-handlers/push');
 
-const handleEventType = event => {
+const handleEventType = async event => {
   switch (event.type) {
     case EVENT_TYPE.COMMITCOMMENT: {
-      handleCommitComment(event);
-      break;
+      return handleCommitComment(event);
     }
     case EVENT_TYPE.CREATE: {
-      handleCreate(event);
-      break;
+      return await handleCreate(event);
     }
     case EVENT_TYPE.DELETE: {
-      handleDelete(event);
-      break;
+      return handleDelete(event);
     }
     case EVENT_TYPE.DISCUSSION: {
-      handleDiscussion(event);
-      break;
+      return await handleDiscussion(event);
     }
     case EVENT_TYPE.FORK: {
-      handleFork(event);
-      break;
+      return handleFork(event);
     }
     case EVENT_TYPE.GOLLUM: {
-      handleGollum(event);
-      break;
+      return handleGollum(event);
     }
     case EVENT_TYPE.ISSUECOMMENT: {
-      handleIssueComment(event);
-      break;
+      return handleIssueComment(event);
     }
     case EVENT_TYPE.ISSUES: {
-      handleIssue(event);
-      break;
+      return handleIssue(event);
     }
     case EVENT_TYPE.MEMBER: {
-      handleMember(event);
-      break;
+      return handleMember(event);
     }
     case EVENT_TYPE.PUBLIC: {
-      handlePublic(event);
-      break;
+      return await handlePublic(event);
     }
     case EVENT_TYPE.PULL: {
-      handlePull(event);
-      break;
+      return await handlePull(event);
     }
     case EVENT_TYPE.PULLREQUESTREVIEW: {
-      handlePullRequestReview(event);
-      break;
+      return handlePullRequestReview(event);
     }
     case EVENT_TYPE.PULLREQUESTREVIEWCOMMENT: {
-      handlePullRequestViewComment(event);
-      break;
+      return handlePullRequestViewComment(event);
     }
     case EVENT_TYPE.PULLREQUESTREVIEWTHREAD: {
-      handlePullRequestViewThread(event);
-      break;
+      return handlePullRequestViewThread(event);
     }
     case EVENT_TYPE.PUSH: {
-      handlePush(event);
-      break;
+      return await handlePush(event);
     }
     case EVENT_TYPE.RELEASE: {
-      console.log('Published a new release');
-      break;
-    }
-    case EVENT_TYPE.SPONSORSHIP: {
-      console.log('Engaged in sponsorship activity');
-      break;
+      return 'Published a new release';
     }
     case EVENT_TYPE.WATCH: {
-      console.log('Starred a repository');
-      break;
+      return 'Starred a repository';
     }
     default: {
-      console.log('Performed an unknown action');
-      break;
+      return 'Performed an unknown action';
     }
   }
 };

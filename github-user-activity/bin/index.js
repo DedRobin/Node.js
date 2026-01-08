@@ -33,7 +33,13 @@ async function main() {
 
     const firstFiveEvents = events.slice(0, 10);
 
-    firstFiveEvents.forEach(event => handleEventType(event));
+    // firstFiveEvents.forEach(event => handleEventType(event));
+
+    const messages = await Promise.all(
+      firstFiveEvents.map(event => handleEventType(event))
+    );
+
+    messages.forEach(message => console.log(message));
   } catch (error) {
     console.error('Fetch error:', error);
   }

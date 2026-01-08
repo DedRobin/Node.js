@@ -15,7 +15,6 @@ const EVENT_TYPE = {
   PULLREQUESTREVIEWTHREAD: 'PullRequestReviewThreadEvent',
   PUSH: 'PushEvent',
   RELEASE: 'ReleaseEvent',
-  SPONSORSHIP: 'SponsorshipEvent',
   WATCH: 'WatchEvent',
 };
 

@@ -1,4 +1,4 @@
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const handleFork = event => {
   const forkedRepoUrl = event?.payload?.forkee?.['clone_url'];
@@ -8,7 +8,8 @@ const handleFork = event => {
 
   const message = `Forked a repository '${forkedRepoName}'
 URL: ${forkedRepoUrl}`;
-  print(message, event);
+
+  return appendDateTime(message, event);
 };
 
 module.exports = handleFork;

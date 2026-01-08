@@ -1,5 +1,5 @@
 const { getRepositoryUrl } = require('../api/github');
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const handlePull = async event => {
   const url = await getRepositoryUrl(event);
@@ -11,7 +11,7 @@ const handlePull = async event => {
   const message = `The pull request is ${action}
 URL: ${url}`;
 
-  print(message, event);
+  return appendDateTime(message, event);
 };
 
 module.exports = handlePull;

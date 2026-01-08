@@ -1,4 +1,4 @@
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const handleMember = event => {
   const collaborator = event?.payload?.member?.login;
@@ -6,7 +6,7 @@ const handleMember = event => {
 
   const message = `The collaborator ${collaborator} access for a repository`;
 
-  print(message, event);
+  return appendDateTime(message, event);
 };
 
 module.exports = handleMember;
