@@ -12,7 +12,6 @@ const EVENT_TYPE = {
   PULL: 'PullRequestEvent',
   PULLREQUESTREVIEW: 'PullRequestReviewEvent',
   PULLREQUESTREVIEWCOMMENT: 'PullRequestReviewCommentEvent',
-  PULLREQUESTREVIEWTHREAD: 'PullRequestReviewThreadEvent',
   PUSH: 'PushEvent',
   RELEASE: 'ReleaseEvent',
   WATCH: 'WatchEvent',

@@ -12,7 +12,6 @@ const handlePublic = require('./event-handlers/public');
 const handlePull = require('./event-handlers/pull');
 const handlePullRequestReview = require('./event-handlers/pullRequestReview');
 const handlePullRequestViewComment = require('./event-handlers/pullRequestViewComment');
-const handlePullRequestViewThread = require('./event-handlers/pullRequestViewThread');
 const handlePush = require('./event-handlers/push');
 
 const handleEventType = async event => {
@@ -55,9 +54,6 @@ const handleEventType = async event => {
     }
     case EVENT_TYPE.PULLREQUESTREVIEWCOMMENT: {
       return handlePullRequestViewComment(event);
-    }
-    case EVENT_TYPE.PULLREQUESTREVIEWTHREAD: {
-      return handlePullRequestViewThread(event);
     }
     case EVENT_TYPE.PUSH: {
       return await handlePush(event);
