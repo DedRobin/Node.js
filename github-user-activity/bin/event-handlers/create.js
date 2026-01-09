@@ -1,9 +1,9 @@
 const { getRepositoryUrl } = require('../api/github');
 const { appendDateTime } = require('./services');
 
-const handleCreate = async event => {
-  const repoURL = await getRepositoryUrl(event);
-  if (!repoURL) throw new getRepositoryUrl('No repository URL');
+const handleCreate = event => {
+  const repoURL = getRepositoryUrl(event);
+  if (!repoURL) throw new Error('No repository URL');
 
   const refType = event?.payload?.['ref_type'];
   if (!refType) throw new Error('No reference type');

@@ -14,19 +14,19 @@ const handlePullRequestReview = require('./event-handlers/pullRequestReview');
 const handlePullRequestViewComment = require('./event-handlers/pullRequestViewComment');
 const handlePush = require('./event-handlers/push');
 
-const handleEventType = async event => {
+const handleEventType = event => {
   switch (event.type) {
     case EVENT_TYPE.COMMITCOMMENT: {
       return handleCommitComment(event);
     }
     case EVENT_TYPE.CREATE: {
-      return await handleCreate(event);
+      return handleCreate(event);
     }
     case EVENT_TYPE.DELETE: {
       return handleDelete(event);
     }
     case EVENT_TYPE.DISCUSSION: {
-      return await handleDiscussion(event);
+      return handleDiscussion(event);
     }
     case EVENT_TYPE.FORK: {
       return handleFork(event);
@@ -44,10 +44,10 @@ const handleEventType = async event => {
       return handleMember(event);
     }
     case EVENT_TYPE.PUBLIC: {
-      return await handlePublic(event);
+      return handlePublic(event);
     }
     case EVENT_TYPE.PULL: {
-      return await handlePull(event);
+      return handlePull(event);
     }
     case EVENT_TYPE.PULLREQUESTREVIEW: {
       return handlePullRequestReview(event);
@@ -56,7 +56,7 @@ const handleEventType = async event => {
       return handlePullRequestViewComment(event);
     }
     case EVENT_TYPE.PUSH: {
-      return await handlePush(event);
+      return handlePush(event);
     }
     case EVENT_TYPE.RELEASE: {
       return 'Published a new release';

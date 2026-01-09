@@ -1,8 +1,8 @@
 const { getRepositoryUrl } = require('../api/github');
 const { appendDateTime } = require('./services');
 
-const handlePublic = async event => {
-  const repoUrl = await getRepositoryUrl(event);
+const handlePublic = event => {
+  const repoUrl = getRepositoryUrl(event);
   if (!repoUrl) throw new Error('No repository URL');
 
   const repoName = event?.repo?.name;

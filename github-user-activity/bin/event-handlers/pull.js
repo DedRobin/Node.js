@@ -1,8 +1,8 @@
 const { getRepositoryUrl } = require('../api/github');
 const { appendDateTime } = require('./services');
 
-const handlePull = async event => {
-  const url = await getRepositoryUrl(event);
+const handlePull = event => {
+  const url = getRepositoryUrl(event);
   if (!url) throw new Error('No pull request URL');
 
   const action = event?.payload?.action;
