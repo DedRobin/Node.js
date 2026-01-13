@@ -4,11 +4,13 @@
   "description": "",
   "scripts": {
     "test": "echo \"Test\"",
-    "task-tracker-cli": "npm run app -w task-tracker-cli"
+    "task-tracker-cli": "npm run app -w task-tracker-cli",
+    "github-activity": "npm run app -w github-activity",
+    "lint": "eslint . --ext .js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DedRobin/test.git"
+    "url": "git+https://github.com/DedRobin/Node.js.git"
   },
   "keywords": [],
   "author": "",
@@ -24,10 +26,11 @@
     "prettier": "^3.7.4"
   },
   "bugs": {
-    "url": "https://github.com/DedRobin/test/issues"
+    "url": "https://github.com/DedRobin/Node.js/issues"
   },
-  "homepage": "https://github.com/DedRobin/test#readme",
+  "homepage": "https://github.com/DedRobin/Node.js#readme",
   "workspaces": [
-    "task-tracker-cli"
+    "task-tracker-cli",
+    "github-user-activity"
   ]
 }

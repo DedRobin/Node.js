@@ -1,5 +1,3 @@
 {
-  "javascript.validate.enable": true,
-  "typescript.validate.enable": true,
-  "javascript.suggestionActions.enabled": false
+  "prettier.endOfLine": "auto"
 }
