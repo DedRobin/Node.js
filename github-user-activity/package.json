@@ -12,5 +12,7 @@
     "lint": "eslint ./bin --ext .js",
     "lint:fix": "eslint --fix ./bin --ext .js"
   },
-  "devDependencies": {}
+  "bin": {
+    "github-activity": "./bin/index.js"
+  }
 }

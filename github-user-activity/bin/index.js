@@ -3,10 +3,15 @@
 const { argv } = require('node:process');
 const { handleEventType, fetchUserEvents } = require('./services');
 
-process.loadEnvFile();
-
 async function main() {
   const args = argv.slice(2);
+
+  try {
+    process.loadEnvFile();
+  } catch {
+    console.warn('Request without a personal access token');
+  }
+
   const username = args.at(0);
 
   if (!username) {

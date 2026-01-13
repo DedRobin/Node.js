@@ -18,7 +18,7 @@ const getUsernameRepositoryUrl = username =>
   new URL(`https://api.github.com/users/${username}/events`);
 
 const fetchUserEvents = async (username, queryParams) => {
-  const token = process.env.PERSONAL_ACCESS_TOKEN;
+  const token = process.env.GH_PERSONAL_ACCESS_TOKEN;
   let url = getUsernameRepositoryUrl(username);
 
   queryParams.slice(1).forEach(param => {
@@ -106,4 +106,8 @@ const handleEventType = event => {
   }
 };
 
-module.exports = { handleEventType, getUsernameRepositoryUrl, fetchUserEvents };
+module.exports = {
+  handleEventType,
+  getUsernameRepositoryUrl,
+  fetchUserEvents,
+};
