@@ -14,6 +14,42 @@ const handlePullRequestReview = require('./event-handlers/pullRequestReview');
 const handlePullRequestViewComment = require('./event-handlers/pullRequestViewComment');
 const handlePush = require('./event-handlers/push');
 
+const getUsernameRepositoryUrl = username =>
+  new URL(`https://api.github.com/users/${username}/events`);
+
+const fetchUserEvents = async (username, queryParams) => {
+  const token = process.env.PERSONAL_ACCESS_TOKEN;
+  let url = getUsernameRepositoryUrl(username);
+
+  queryParams.slice(1).forEach(param => {
+    const [key, value] = param.split('=');
+    switch (key) {
+      case 'page': {
+        url.searchParams.set('page', value);
+        break;
+      }
+      case 'per_page': {
+        url.searchParams.set('per_page', value);
+        break;
+      }
+      default:
+        break;
+    }
+  });
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        accept: 'application/vnd.github+json',
+        Authorization: token ? `Bearer ${token}` : undefined,
+      },
+    });
+    return await response.json();
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
+};
+
 const handleEventType = event => {
   switch (event.type) {
     case EVENT_TYPE.COMMITCOMMENT: {
@@ -70,4 +106,4 @@ const handleEventType = event => {
   }
 };
 
-module.exports = { handleEventType };
+module.exports = { handleEventType, getUsernameRepositoryUrl, fetchUserEvents };

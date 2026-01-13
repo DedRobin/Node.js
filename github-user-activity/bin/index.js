@@ -1,44 +1,25 @@
 #!/usr/bin/env node
 
 const { argv } = require('node:process');
-const { handleEventType } = require('./services');
+const { handleEventType, fetchUserEvents } = require('./services');
 
 process.loadEnvFile();
 
 async function main() {
-  let username;
-
   const args = argv.slice(2);
+  const username = args.at(0);
 
-  if (args.length === 0) {
+  if (!username) {
     console.error(`Username is not provided`);
     return;
   }
 
-  username = args[0];
+  const queryParams = args.slice(1);
 
-  const token = process.env.PERSONAL_ACCESS_TOKEN;
+  const events = await fetchUserEvents(username, queryParams);
+  const messages = events.map(event => handleEventType(event));
 
-  try {
-    const response = await fetch(
-      `https://api.github.com/users/${username}/events`,
-      {
-        headers: {
-          accept: 'application/vnd.github+json',
-          Authorization: token ? `Bearer ${token}` : undefined,
-        },
-      }
-    );
-    const events = await response.json();
-
-    const firstFiveEvents = events.slice(0, 10);
-
-    const messages = firstFiveEvents.map(event => handleEventType(event));
-
-    messages.forEach(message => console.log(message));
-  } catch (error) {
-    console.error('Fetch error:', error);
-  }
+  messages.forEach(message => console.log(message));
 }
 
 main();

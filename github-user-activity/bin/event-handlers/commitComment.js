@@ -1,4 +1,4 @@
-const { print } = require('./services');
+const { appendDateTime } = require('./services');
 
 const handleCommitComment = event => {
   const comment = event?.payload?.comment?.['body'];
@@ -16,7 +16,7 @@ const handleCommitComment = event => {
   const message = `Commented on a commit by user '${commentOwner}' in repository '${repoName}'
 URL: ${url}`;
 
-  print(message, event);
+  return appendDateTime(message, event);
 };
 
 module.exports = handleCommitComment;

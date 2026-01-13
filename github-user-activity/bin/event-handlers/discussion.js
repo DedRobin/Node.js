@@ -1,6 +1,6 @@
 const { appendDateTime } = require('./services');
 
-const handleDiscussion = async event => {
+const handleDiscussion = event => {
   const url = event?.payload?.discussion?.['html_url'];
   if (!url) throw new Error("No discussion's url");
 
